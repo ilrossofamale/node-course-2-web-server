@@ -2,7 +2,9 @@ const express = require('express');
 const hbs = require('hbs');
 const fs = require('fs');
 
-
+//configurazione porta per deploy su heroku
+//process.env.PORT => variabile definita in heroku
+const port = process.env.PORT || 3000;
 
 var app = express();
 
@@ -104,8 +106,15 @@ app.get('/bad', (req, res) => {
 	});
 });
 
+app.get('/project', (req, res) => {
+	res.render('project.hbs',{
+		pageTitle: 'Pagina Portfolio',
+		welcomeText: 'Quanti bei lavori'
+	});
+});
+
 
 //START SERVER
-app.listen(3000, () => {
-	console.log('Server è sulla porta 3000');
+app.listen(port, () => {
+	console.log(`Server è sulla porta ${port}`);
 });
